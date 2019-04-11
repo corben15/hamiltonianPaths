@@ -16,7 +16,7 @@ Problem Definition:
          9,8,7]                              7,6,5]
 '''
 
-
+import math
 import numpy as np;
 
 
@@ -45,31 +45,63 @@ def findMinValueLocation(array):
     This function will determine if any matix has a hamiltonian path given it is a square matrix.
 '''
 def checkIsHamiltonianPath(array):
-
     arrayShape = array.shape
-    assert isSquareArray(array)
-
-    l = arrayShape[0]
-
+    #assert isSquareArray(array)
+    length = arrayShape[0]
+    numElements = length**2
     print(array)
-    print
-    print("Array Shape: ", arrayShape)
+    print(array[1][2])
 
-    for i in range(l):
-        for j in range(l):
-            print("Position:",i,j, "Value:", array[i][j])
-            print("Right:")
-            if(array[i][j+1] != (array[i][j] + 1) or array[i][j-1] != (array[i][j] - 1)):
-                return False;
-            if(array[i+1][j] != (array[i][j] + 1) or array[i-1][j] != (array[i][j] - 1)):
-                return False;
+    # for each element in the matrix there must be exactly two adjacent numbers
+    # except for the start and end points which should have one adjacent number
+    for i in range(l**2):
+        count = 0;
+        row = i//l
+        col = i%l
+        if(row == 0): #you are in the top row of the matrix
+            if(col =0):
+                print
+            if(col = l-1);
+                print
+        
+        elif(i%l == l-1):
+            print
     return True;
 
-
+""" Checks to see if a matrix is a hamiltonian path. Matrix is represented as a list
+args: list P
+return: bool
+"""
+def buds_is_hamiltonian(P):
+    good = True
+    n = int(math.sqrt(len(P)))
+    for i in range(n):
+        count = 0
+        if (i%n) != 0:
+            if abs(P[i-1] - P[i]) == 1:
+                count += 1
+        if (i%n) != (n-1):
+            if abs(P[i] - P[i+1]) == 1:
+                count += 1
+        if (i//n) > 0:
+            if abs(P[i] - P[i-n]) == 1:
+                count += 1
+        if (i//n) < (n-1):
+            if abs(P[i] - P[i+n]) == 1:
+                count += 1
+        if (P[i] == 1) or (P[i] == n*n):
+            if count != 1:
+                return False
+        elif count != 2:
+            return False
+    return good
 
 if __name__ == '__main__':
 
     myArray = np.array([[1,2,3],[6,5,4],[7,8,9]])
+    myList = [1,2,3,6,5,4,7,8,9]
     print(myArray[0][0])
+    print(0%3)
+    print(buds_is_hamiltonian(myList))
 
-    print(checkIsHamiltonianPath(myArray))
+    #print(checkIsHamiltonianPath(myArray))
