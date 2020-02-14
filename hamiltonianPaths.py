@@ -1,5 +1,5 @@
 '''
-author: Nicholas Corbett
+author: Nicholas Corbett & Andrew (Bud) Fucarino
 
 Problem Definition:
     Find a maximum translation cycle so that when you translate a hamiltonian
@@ -17,62 +17,14 @@ Problem Definition:
 '''
 
 import math
-import numpy as np;
+from grid import *
 
-
-def isSquareArray(array):
-    arrayShape = array.shape
-    return arrayShape[0] == arrayShape[1]
-
-def findMinValueLocation(array):
-    arrayShape = array.shape;
-    minLocation = [0,0];
-    minValue = array[0][0];
-    for i in range(arrayShape[0]):
-        for j in range(arrayShape[1]):
-            if(array[i][j] <= minValue):
-                minValue = array[i][j];
-                minLocation = [i,j];
-    return minValue;
-
-'''A hamiltonian path is a path in a grid is a path that visits each node exactly once
-    and in this case visits them in increasing order. Examples of a grid in which a hamiltonian
-    path exists for 3x3 matrices are:
-    [1,2,3          and         [5,4,3
-     6,5,4                       6,1,2
-     7,8,9]                      7,8,9]
-
-    This function will determine if any matix has a hamiltonian path given it is a square matrix.
-'''
-def checkIsHamiltonianPath(array):
-    arrayShape = array.shape
-    #assert isSquareArray(array)
-    length = arrayShape[0]
-    numElements = length**2
-    print(array)
-    print(array[1][2])
-
-    # for each element in the matrix there must be exactly two adjacent numbers
-    # except for the start and end points which should have one adjacent number
-    for i in range(l**2):
-        count = 0;
-        row = i//l
-        col = i%l
-        if(row == 0): #you are in the top row of the matrix
-            if(col =0):
-                print
-            if(col = l-1);
-                print
-        
-        elif(i%l == l-1):
-            print
-    return True;
 
 """ Checks to see if a matrix is a hamiltonian path. Matrix is represented as a list
 args: list P
 return: bool
 """
-def buds_is_hamiltonian(P):
+def is_hamiltonian(P):
     good = True
     n = int(math.sqrt(len(P)))
     for i in range(n):
@@ -96,12 +48,49 @@ def buds_is_hamiltonian(P):
             return False
     return good
 
+""" Enumerates all the hamiltonian paths for and nxn matrix (iteratively)
+    1. Only check small upper triangle for starting point of path
+    2. Check if you divide Path:
+       3x3 example:
+       _ are the not yet visited nodes/points
+            1,_,_
+            2,3,_
+            _,4,_
+    3. End point degree of freedoms
+"""
+def enumerate_all_paths_iterative(n):
+    print()
+
+""" Enumerates all the hamiltonian paths for and nxn matrix (recursively)
+"""
+def enumerate_all_paths_recursive(n):
+    print()
+
+
 if __name__ == '__main__':
 
-    myArray = np.array([[1,2,3],[6,5,4],[7,8,9]])
-    myList = [1,2,3,6,5,4,7,8,9]
-    print(myArray[0][0])
-    print(0%3)
-    print(buds_is_hamiltonian(myList))
+    lcm_dict = { 3: [4,5],
+                 4: [4,5,7],
+                 5: [4,5,7,9],
+                 6: [4,5,7,9,11],
+                 7: [4,5,7,9,11,13]}
 
-    #print(checkIsHamiltonianPath(myArray))
+    grid = Grid(3)
+    grid.grid_print()
+
+
+    # UNIT TEST FOR is_hamiltonian
+    '''
+    list_3_3_correct = [1,2,3,6,5,4,7,8,9]
+    list_3_3_incorrect = [1,2,3,4,5,6,7,8,9]
+
+    list_4_4_correct = [1,2,3,4,8,7,6,5,9,10,11,12,16,15,14,13]
+    list_4_4_incorrect = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+
+
+    print(is_hamiltonian(list_3_3_correct))
+    print(is_hamiltonian(list_3_3_incorrect))
+
+    print(is_hamiltonian(list_4_4_correct))
+    print(is_hamiltonian(list_4_4_incorrect))
+    '''
