@@ -16,9 +16,12 @@ Problem Definition:
          9,8,7]                              7,6,5]
 '''
 
+def enumerate_all_3():
+    print()
+
 
 def main():
-    
+    all_paths = set()
     print()
 
 if __name__ == '__main__':

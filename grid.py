@@ -16,6 +16,12 @@ class Cell:
         self.number = number
         self.df = df
 
+    def __hash__(self):
+        return hash(self.number, self.df)
+
+    def __eq__(self, other):
+        return self.number == other.number and self.df == self.df
+
 
 class Grid:
 
@@ -50,6 +56,11 @@ class Grid:
                         self.grid[i].df = 3
                     else:
                         self.grid[i].df = 4
+    def __hash__(self):
+        return hash(self.n, self.cellCount, self.grid)
+
+    def __eq__(self, other):
+        return self.n == other.n and self.grid == other.grid
 
     def grid_print(self):
         maxNumber = self.cellCount
@@ -169,6 +180,7 @@ class Grid:
             elif count != 2:
                 return False
         return good
+
 
 
 

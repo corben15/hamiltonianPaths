@@ -109,8 +109,22 @@ class TestGridMethods(unittest.TestCase):
         grid_3_dogleg = Grid([1,2,9,4,3,8,5,6,7])
         assert(grid_3_dogleg.is_hamiltonian() == True)
 
+    def test_cell_eq(self):
+        print()
+        cell_1 = Cell(1,4)
+        cell_2 = Cell(1,4)
+        cell_3 = Cell(2,3)
+        assert(cell_1 == cell_2)
+        assert(not(cell_1 == cell_3))
 
+    def test_grid_eq(self):
+        print()
+        grid_1 = Grid([1,2,3,4,5,6,7,8,9])
+        grid_2 = Grid([1,2,3,4,5,6,7,8,9])
+        grid_3 = Grid([9,8,7,6,5,4,3,2,1])
 
+        assert(grid_1 == grid_2)
+        assert(not(grid_1 == grid_3))
 
 
 
