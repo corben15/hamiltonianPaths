@@ -57,6 +57,8 @@ def is_hamiltonian(P):
             2,3,_
             _,4,_
     3. End point degree of freedoms
+    4. Symmetry: Test if turns are equal 4 way rotation, more right or more left
+        then it only has 2 way symmetry
 """
 def enumerate_all_paths_iterative(n):
     print()
@@ -73,14 +75,15 @@ if __name__ == '__main__':
                  4: [4,5,7],
                  5: [4,5,7,9],
                  6: [4,5,7,9,11],
-                 7: [4,5,7,9,11,13]}
+                 7: [4,5,7,9,11,13]
+                 }
 
-    grid = Grid(3)
-    grid.grid_print()
+
+
+
 
 
     # UNIT TEST FOR is_hamiltonian
-    '''
     list_3_3_correct = [1,2,3,6,5,4,7,8,9]
     list_3_3_incorrect = [1,2,3,4,5,6,7,8,9]
 
@@ -93,4 +96,3 @@ if __name__ == '__main__':
 
     print(is_hamiltonian(list_4_4_correct))
     print(is_hamiltonian(list_4_4_incorrect))
-    '''

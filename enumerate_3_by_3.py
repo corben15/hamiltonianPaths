@@ -16,20 +16,10 @@ Problem Definition:
          9,8,7]                              7,6,5]
 '''
 
-import numpy as np;
 
+def main():
+    
+    print()
 
-def isSquareArray(array):
-    arrayShape = array.shape
-    return arrayShape[0] == arrayShape[1]
-
-def findMinValueLocation(array):
-    arrayShape = array.shape;
-    minLocation = [0,0];
-    minValue = array[0][0];
-    for i in range(arrayShape[0]):
-        for j in range(arrayShape[1]):
-            if(array[i][j] <= minValue):
-                minValue = array[i][j];
-                minLocation = [i,j];
-    return minValue;
+if __name__ == '__main__':
+    main()
