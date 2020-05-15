@@ -27,7 +27,8 @@ return: bool
 def is_hamiltonian(P):
     good = True
     n = int(math.sqrt(len(P)))
-    for i in range(n):
+
+    for i in range(len(P)):
         count = 0
         if (i%n) != 0:
             if abs(P[i-1] - P[i]) == 1:
@@ -75,8 +76,9 @@ if __name__ == '__main__':
                  4: [4,5,7],
                  5: [4,5,7,9],
                  6: [4,5,7,9,11],
-                 7: [4,5,7,9,11,13]
-                 }
+                 7: [4,5,7,9,11,13],
+                 8: [3,5,7,8,11,13,17],
+                 9: [1,1,3,4,5,7,11,13,17,19]}
 
 
 
@@ -96,3 +98,4 @@ if __name__ == '__main__':
 
     print(is_hamiltonian(list_4_4_correct))
     print(is_hamiltonian(list_4_4_incorrect))
+    print(is_hamiltonian([1,4,0,3]))

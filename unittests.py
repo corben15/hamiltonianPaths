@@ -4,6 +4,7 @@ from grid import *
 
 
 class TestGridMethods(unittest.TestCase):
+    '''
     # Test the initialization of the grid is working correctly
     def test_grid_init_int(self):
         print()
@@ -27,11 +28,12 @@ class TestGridMethods(unittest.TestCase):
         gridSize = random.randint(2,10)
         grid1 = Grid(gridSize)
 
+        grid1.grid_print()
         # Set cells by Row and Column
         for i in range(grid1.n):
             for j in range(grid1.n):
                 grid1.set_cell(i*grid1.n+j,i,j)
-
+        grid1.grid_print()
         # Set cells by index
         grid2 = Grid(gridSize)
         for i in range(grid2.cellCount):
@@ -90,9 +92,11 @@ class TestGridMethods(unittest.TestCase):
         grid4.set_cell(16,15)
         assert(grid4.grid[15].number == 16)
         assert(grid4.grid[15].df == 0)
-
+    '''
+    
     def test_is_hamiltonian(self):
         print()
+        print("Test is_hamiltonian")
         # Test "S" shape
         list_3_correct = [1,2,3,6,5,4,7,8,9]
         list_3_incorrect = [1,2,3,4,5,6,7,8,9]
@@ -109,6 +113,9 @@ class TestGridMethods(unittest.TestCase):
         grid_3_dogleg = Grid([1,2,9,4,3,8,5,6,7])
         assert(grid_3_dogleg.is_hamiltonian() == True)
 
+        grid_2 = Grid([1,4,0,3])
+        assert(grid_2.is_hamiltonian() == False)
+    '''
     def test_cell_eq(self):
         print()
         cell_1 = Cell(1,4)
@@ -125,6 +132,23 @@ class TestGridMethods(unittest.TestCase):
 
         assert(grid_1 == grid_2)
         assert(not(grid_1 == grid_3))
+
+    def test_cell_hash(self):
+        cell1 = Cell(1,1)
+        print(hash(cell1))
+
+    def test_grid_hash(self):
+        grid1 = Grid([1,2,3,4,5,6,7,8,9])
+        print(hash(grid1))
+
+    def test_copy(self):
+        print("TEST COPY")
+        grid1 = Grid([1,2,3,4,5,6,7,8,9])
+        grid2 = grid1.copy()
+        grid2.set_cell(0,0)
+        grid1.grid_print()
+        grid2.grid_print()
+    '''
 
 
 

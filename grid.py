@@ -1,11 +1,11 @@
 
-# TODO: Check if 2 grids are equal
 # Todo: enumerate all 3x3
 # TODO: Enumerates nxn
-# TODO: input 2 graphs output cycle length
+# TODO: input 2 graphs output cycle lengths
 # TODO: 3x3 and 4x4 tabulare cycle length
 # Todo: Check if path is cut off
 
+import copy
 import math
 
 class Cell:
@@ -17,10 +17,16 @@ class Cell:
         self.df = df
 
     def __hash__(self):
-        return hash(self.number, self.df)
+        return hash((self.number, self.df))
 
     def __eq__(self, other):
         return self.number == other.number and self.df == self.df
+
+    def get_value(self):
+        return self.number
+
+    def get_df(self):
+        return self.df
 
 
 class Grid:
@@ -57,7 +63,7 @@ class Grid:
                     else:
                         self.grid[i].df = 4
     def __hash__(self):
-        return hash(self.n, self.cellCount, self.grid)
+        return hash(tuple([i.number for i in self.grid]))
 
     def __eq__(self, other):
         return self.n == other.n and self.grid == other.grid
@@ -91,12 +97,15 @@ class Grid:
             index = row*self.n + col
             if(row > 0):
                 self.grid
+        if(index > self.n**2 - 1): return
         self.grid[index].number = val
 
         # Set degrees of freedom for neighbors
         n = self.n
         self.grid[index].df = 0
+        # Left Column
         if(index%n == 0):
+
             if(index == 0):
                 if(self.grid[index+1].df > 0):
                     self.grid[index+1].df -= 1
@@ -114,7 +123,9 @@ class Grid:
                     self.grid[index+1].df -= 1
                 if(self.grid[index+n].df > 0):
                     self.grid[index+n].df -= 1
+        # Right Column
         elif(index%n == n-1):
+
             if(index == n-1):
                 if(self.grid[index-1].df > 0):
                     self.grid[index-1].df -= 1
@@ -132,6 +143,7 @@ class Grid:
                     self.grid[index-1].df -= 1
                 if(self.grid[index+n].df > 0):
                     self.grid[index+n].df -= 1
+        # Middle Columns
         elif(index%n>0 and index%n<n-1):
             if(index>0 and index<n-1):
                 if(self.grid[index-1].df > 0):
@@ -158,9 +170,8 @@ class Grid:
                     self.grid[index+1].df -= 1
 
     def is_hamiltonian(self):
-        good = True
         n = self.n
-        for i in range(int(n)):
+        for i in range(int(len(self.grid))):
             count = 0
             if (i%n) != 0:
                 if abs(self.grid[i-1].number - self.grid[i].number) == 1:
@@ -179,7 +190,44 @@ class Grid:
                     return False
             elif count != 2:
                 return False
-        return good
+        return True
+
+    def get_cell_value(self,c):
+        # Make sure c is a valid location in the grid
+        if(c<0):
+            return None
+        elif(c>self.n**2 - 1):
+            return None
+        return self.grid[c].get_value()
+
+    def get_cell_df(self,c):
+        # make sure c is a valid loaction in the grid
+        if(c<0):
+            return None
+        elif(c>self.n**2 - 1):
+            return None
+        return self.grid[c].get_df()
+
+    def can_move(self, move, current_loc):
+        if(move == 'r'):
+            if((current_loc+1)%self.n != 0):
+                return True
+        elif(move == 'd'):
+            if((current_loc+self.n) < self.n**2):
+                return True
+        elif(move == 'l'):
+            if((current_loc-1)%self.n != self.n-1):
+                return True
+        elif(move == 'u'):
+            if((current_loc-self.n) > 0):
+                return True
+        return False
+
+    def copy(self):
+        return copy.deepcopy(self)
+
+
+
 
 
 
