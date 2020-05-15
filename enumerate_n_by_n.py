@@ -118,7 +118,7 @@ def enumerate_all_3_recursive(grid, path_set,previous_loc,current_loc):
 def compute_lcm(A):
     lcm = A[0]
     for i in A[1:]:
-      lcm = lcm*i/gcd(int(lcm), i)
+      lcm = lcm*i/math.gcd(int(lcm), i)
     return (int(lcm))
 
 def cycle_length(P1,P2):
@@ -156,7 +156,7 @@ def main():
 
 
     print("----Start List-----")
-    n = 5
+    n = 2
     startList = generate_start_list(n)
     g_enum = Grid(n)
     g_enum.grid_print()
@@ -181,6 +181,25 @@ def main():
         h.grid_print()
     '''
 
+    solutionCount = 0
+    lcm = compute_lcm([4])
+    iter = 0
+    print(lcm)
+    oneiterstart = time.time()
+    for h1 in path_set:
+        timesum = 0
+        for h2 in path_set:
+            iter += 1
+            if(h1!=h2):
+                if(cycle_length([i.number for i in h1.grid], [i.number for i in h2.grid])==lcm):
+                    solutionCount += 1
+
+            if(iter%100000==0):
+                oneiterend = time.time()
+                print("Time for N iters:", oneiterend-oneiterstart)
+                oneiterstart = time.time()
+
+    print(solutionCount)
 
 
 

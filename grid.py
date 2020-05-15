@@ -66,7 +66,7 @@ class Grid:
         return hash(tuple([i.number for i in self.grid]))
 
     def __eq__(self, other):
-        return self.n == other.n and self.grid == other.grid
+        return tuple([i.number for i in self.grid])==tuple([i.number for i in other.grid])
 
     def grid_print(self):
         maxNumber = self.cellCount
