@@ -37,16 +37,6 @@ def generate_start_list(n=3):
         startIndex = endIndex - rowlength
     return startList
 
-
-def enumerate_all_3(startList):
-    #while statement
-        #check right
-        #check down
-        #check left
-        #check up
-        #make step/go back
-    print()
-
 def flip_iso(grid,n):
     candidate = np.array([i.number for i in grid.grid])
     flipCandidate = np.full(len(candidate),(n*n+1) - candidate)
@@ -101,6 +91,8 @@ def enumerate_all_3_recursive(grid, path_set,previous_loc,current_loc):
         if(g_copy.can_move("u", current_loc) and g_copy.get_cell_df(current_loc-grid.n)!=0):
             enumerate_all_3_recursive(g_copy,path_set, current_loc,current_loc-grid.n)
 
+    # Need a separate case for if it is the last step because the degree of
+    # freedom of the last cell will be zero but you can still move to it.
     elif(lastStep):
         # Check Right
         if(g_copy.can_move("r", current_loc)):

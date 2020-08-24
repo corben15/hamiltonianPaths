@@ -4,7 +4,7 @@
 #include <set>
 #include <ctime>
 #include <cmath>
-#include <ctime>m
+#include <ctime>
 #include "grid.h"
 
 
@@ -30,8 +30,33 @@ vector<int> generateStartList(int n){
   return startVector;
 }
 
+int gcd(int a, int b) {
+   if (b == 0)
+   return a;
+   return gcd(b, a % b);
+}
+
+size_t computeLCM0fArray();
+
+size_t cycleLength(Grid g1, Grid g2){
+  //TODO
+}
+
+//TODO
 void enumerateAllRecursive(Grid g, set<Grid> pathSet, int prevLoc, int currentLoc){
-  cout << "TODO" << endl;
+  cout << "Hi"<< endl;
+
+  // Take step/Set cell
+
+  // Check if the grid is solved
+
+  // Step right
+
+  // Step down
+
+  // Step Left
+
+  // Step up
 }
 
 int main(){
