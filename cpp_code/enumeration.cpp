@@ -36,11 +36,13 @@ int gcd(int a, int b) {
    return gcd(b, a % b);
 }
 
+/*
 size_t computeLCM0fArray();
 
 size_t cycleLength(Grid g1, Grid g2){
   //TODO
 }
+*/
 
 //TODO
 void enumerateAllRecursive(Grid g, set<Grid> pathSet, int prevLoc, int currentLoc){

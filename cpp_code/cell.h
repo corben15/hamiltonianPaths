@@ -16,6 +16,7 @@ class Cell{
     void copy( const Cell &c);
 
   public:
+    friend class Grid;
     // Constructor, Destructor, Assignment Operator
     Cell(size_t n=0, size_t df=4){ this -> create(n,df);}
     Cell(const Cell &c){copy(c);}
